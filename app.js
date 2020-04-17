@@ -10,17 +10,17 @@ mongoose.connection.on("error", function(e) {
   console.error(e); 
 });
 
-const PersonSchema = mongoose.Schema({
+const VisitorSchema = mongoose.Schema({
   name: String,
-  date: Date,
+  date: {type: Date, default: Date.now},
 });
 
-const Visitor = mongoose.model("Persons",PersonSchema);
+const Visitor = mongoose.model("Visitor",VisitorSchema);
 
 app.get('/', (req, res) => {
 
     let name = req.query.name;
-    date = Date.now();
+    
    
     
 
@@ -29,7 +29,6 @@ app.get('/', (req, res) => {
       
       const person = new Visitor({
         name,
-        date,
       });
 
       person.save((error)=>{
